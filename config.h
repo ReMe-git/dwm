@@ -6,7 +6,7 @@ static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
-static const int vertpad            = 5;       /* vertical padding of bar */
+static const int vertpad            = 3;       /* vertical padding of bar */
 static const int sidepad            = 5;       /* horizontal padding of bar */
 static const char *fonts[]          = { "InconsolataGo Nerd Font:size=22",
 					 "WenQuanYi Micro Hei:size=22" };

@@ -56,7 +56,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "show", "-drun",NULL };
+static const char *dmenucmd[] = { "rofi", "-show", "drun",NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 
 static const Key keys[] = {

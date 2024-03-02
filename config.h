@@ -8,7 +8,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const int vertpad            = 5;       /* vertical padding of bar */
 static const int sidepad            = 5;       /* horizontal padding of bar */
-static const char *fonts[]          = { "InconsolataGo Nerd Font:size=20" };
+static const char *fonts[]          = { "InconsolataGo Nerd Font:size=22",
+					 "WenQuanYi Micro Hei:size=22" };
 static const char col_gray1[]       = "#1a1b26";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -21,7 +22,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "󰖟", "󰈮", "󰈙", "󰈟", "󰈣"};
+static const char *tags[] = { "󰆍", "󰖟", "󰈮", "󰈙", "󰈟", "󰈣"};
 
 static const Rule rules[] = {
 	/* xprop(1):

@@ -59,6 +59,11 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "rofi", "-show", "drun",NULL };
 static const char *termcmd[]  = { "kitty", NULL };
+static const char *soundupcmd[] = {"pamixer", "-i", "5", NULL};
+static const char *sounddowncmd[] = {"pamixer", "-d", "5", NULL};
+static const char *togglemutecmd[] = {"pamxier", "-t", NULL};
+static const char *lightupcmd[] = {"xbacklight", "+5", NULL};
+static const char *lightdowncmd[] = {"xbacklight", "-5", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -91,6 +96,11 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_5,                      4)
 	TAGKEYS(                        XK_6,                      5)
 	{ MODKEY|ShiftMask,             XK_m,      quit,           {0} },
+	{ MODKEY,                       XK_F1,      spawn,         {.v = togglemutecmd } },
+	{ MODKEY,                       XK_F2,      spawn,         {.v = sounddowncmd } },
+	{ MODKEY,                       XK_F3,      spawn,         {.v = soundupcmd } },
+	{ MODKEY,                       XK_F5,      spawn,         {.v = lightdowncmd } },
+	{ MODKEY,                       XK_F6,      spawn,         {.v = lightupcmd } },
 };
 
 /* button definitions */

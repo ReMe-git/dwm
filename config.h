@@ -61,7 +61,7 @@ static const char *dmenucmd[] = { "rofi", "-show", "drun",NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *soundupcmd[] = {"pamixer", "-i", "5", NULL};
 static const char *sounddowncmd[] = {"pamixer", "-d", "5", NULL};
-static const char *togglemutecmd[] = {"pamxier", "-t", NULL};
+static const char *togglemutecmd[] = {"pamixer", "-t", NULL};
 static const char *lightupcmd[] = {"xbacklight", "+5", NULL};
 static const char *lightdowncmd[] = {"xbacklight", "-5", NULL};
 

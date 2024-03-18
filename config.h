@@ -64,6 +64,8 @@ static const char *sounddowncmd[] = {"pamixer", "-d", "5", NULL};
 static const char *togglemutecmd[] = {"pamixer", "-t", NULL};
 static const char *lightupcmd[] = {"xbacklight", "+5", NULL};
 static const char *lightdowncmd[] = {"xbacklight", "-5", NULL};
+static const char *flameshotcmd[] = {"flameshot", "gui", NULL};
+
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -101,6 +103,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F3,      spawn,         {.v = soundupcmd } },
 	{ MODKEY,                       XK_F5,      spawn,         {.v = lightdowncmd } },
 	{ MODKEY,                       XK_F6,      spawn,         {.v = lightupcmd } },
+	{MODKEY|ShiftMask,		XK_s,       spawn,         {.v = flameshotcmd} },
 };
 
 /* button definitions */

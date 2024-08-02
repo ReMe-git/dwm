@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
@@ -62,20 +63,21 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "rofi", "-show", "drun",NULL };
-static const char *termcmd[]  = { "kitty", NULL };
-static const char *soundupcmd[] = {"pamixer", "-i", "5", NULL};
-static const char *sounddowncmd[] = {"pamixer", "-d", "5", NULL};
-static const char *togglemutecmd[] = {"pamixer", "-t", NULL};
-static const char *lightupcmd[] = {"xbacklight", "+5", NULL};
-static const char *lightdowncmd[] = {"xbacklight", "-5", NULL};
-static const char *flameshotcmd[] = {"flameshot", "gui", NULL};
+static const char *appmenucmd[] = { "rofi", "-show", "drun",NULL };
+static const char *terminalcmd[]  = { "kitty", NULL };
+static const char *soundupcmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%",   NULL };
+static const char *sounddowncmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",   NULL };
+static const char *togglemutecmd[] = { "pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle", NULL };
+static const char *lightupcmd[] = { "brightnessctl", "set", "5%+", NULL };
+static const char *lightdowncmd[] = { "brightnessctl", "set", "5%-", NULL };
+static const char *screenshotcmd[] = { "/bin/bash", "-c", "mkdir -p ~/Pictures/screenshot && scrot ~/Pictures/screenshot/%m-%d-%Y-%H%M%S.png", NULL };
+static const char *screenshotselectcmd[] = { "/bin/bash", "-c", "mkdir -p ~/Pictures/screenshot && scrot ~/Pictures/screenshot/%m-%d-%Y-%H%M%S.png --select --line mode=edge", NULL };
 
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_w,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_q, 	   spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = appmenucmd } },
+	{ MODKEY|ShiftMask,             XK_q, 	   spawn,          {.v = terminalcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -103,12 +105,13 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_5,                      4)
 	TAGKEYS(                        XK_6,                      5)
 	{ MODKEY|ShiftMask,             XK_m,      quit,           {0} },
-	{ MODKEY,                       XK_F1,      spawn,         {.v = togglemutecmd } },
-	{ MODKEY,                       XK_F2,      spawn,         {.v = sounddowncmd } },
-	{ MODKEY,                       XK_F3,      spawn,         {.v = soundupcmd } },
-	{ MODKEY,                       XK_F5,      spawn,         {.v = lightdowncmd } },
-	{ MODKEY,                       XK_F6,      spawn,         {.v = lightupcmd } },
-	{MODKEY|ShiftMask,		XK_s,       spawn,         {.v = flameshotcmd} },
+	{ 0,                       XF86XK_AudioMute,      spawn,         {.v = togglemutecmd } },
+	{ 0,                       XF86XK_AudioLowerVolume,      spawn,         {.v = sounddowncmd } },
+	{ 0,                       XF86XK_AudioRaiseVolume,      spawn,         {.v = soundupcmd } },
+	{ 0,                       XF86XK_MonBrightnessDown,      spawn,         {.v = lightdowncmd } },
+	{ 0,                       XF86XK_MonBrightnessUp,      spawn,         {.v = lightupcmd } },
+	{ 0,											 XK_Print,       spawn,         {.v = screenshotselectcmd} },
+	{ ShiftMask,							 XK_Print,       spawn,         {.v = screenshotcmd} },
 };
 
 /* button definitions */
@@ -118,7 +121,7 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[1]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = terminalcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

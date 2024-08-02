@@ -154,6 +154,7 @@ typedef struct {
 	const char *title;
 	unsigned int tags;
 	int isfloating;
+	int hideborder;
 	int monitor;
 } Rule;
 
@@ -338,6 +339,10 @@ applyrules(Client *c)
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
 				c->mon = m;
+			if (r->hideborder)
+				c->bw = 0;
+			else
+				c->bw = borderpx;
 		}
 	}
 	if (ch.res_class)
@@ -1183,7 +1188,6 @@ manage(Window w, XWindowAttributes *wa)
 		c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
 	c->x = MAX(c->x, c->mon->wx);
 	c->y = MAX(c->y, c->mon->wy);
-	c->bw = borderpx;
 
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
